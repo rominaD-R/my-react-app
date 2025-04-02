@@ -11,7 +11,7 @@ function Square({ value, onSquareClick }) {
   );
 };
 
-export default function Board() {
+function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
@@ -33,7 +33,7 @@ export default function Board() {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Next player: " + (xIsNext ? "X" : "O");         // xIsNext keeps track of which player's turn is next (X or O)
   }
 
   return (
@@ -59,7 +59,7 @@ export default function Board() {
 }
 
 function calculateWinner(squares) {
-  const lines = [
+  const lines = [               // The possible patterns that a mark (X or O) needs to be in in order to be three in a row
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -76,4 +76,17 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+export default function Game() {
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board />
+      </div>
+      <div className="game-info">
+        <ol>{/*TODO*/}</ol>
+      </div>
+    </div>
+  );
 }
